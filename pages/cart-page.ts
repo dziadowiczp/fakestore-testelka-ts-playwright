@@ -1,6 +1,4 @@
-import { Locator, Page } from "@playwright/test";
-
-// import { TripName } from "../helper/trips";
+import { Locator, Page } from '../pages/base-page';
 
 export class CartPage {
     private cartItem: Locator;
@@ -75,10 +73,10 @@ export class CartPage {
     parsePrice(priceString: string): number {
         return parseFloat(
             priceString
-                .replace(/\s/g, '')        // usuwa spacje
-                .replace(/&nbsp;/g, '')    // usuwa &nbsp; jeśli występuje
-                .replace(/zł/g, '')        // usuwa zł
-                .replace(',', '.')         // zamienia przecinek na kropkę
+                .replace(/\s/g, '')
+                .replace(/&nbsp;/g, '')
+                .replace(/zł/g, '')
+                .replace(',', '.')
         );
     }
 }

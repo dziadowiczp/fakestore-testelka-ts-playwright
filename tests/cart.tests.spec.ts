@@ -1,10 +1,9 @@
 import { expect, test } from '../pages/base-page';
 import { hikes, other, windsurfing, yoga } from '../data/trips'
 
-test.beforeEach(async ({ page, navigationPage: navigationPage }) => {
+test.beforeEach(async ({ page, navigationPage }) => {
     await page.goto('/');
     await navigationPage.closeStoreNotice();
-    await page.reload()
 });
 
 test.describe('Cart functionality tests', () => {
@@ -49,7 +48,6 @@ test.describe('Cart functionality tests', () => {
         )
     });
 
-    // • użytkownik ma możliwość wybrania ilości wycieczek, które chce zakupić, na stronie produktu (np. dla zamówienia dla kilku osób),
     test('User can select the quantity of a trip on the product page before adding to the cart', async ({ navigationPage, cartPage, productPage }) => {
         await navigationPage.searchSpecificTrip(yoga.Malta)
         await productPage.changeNumberOfItems(3)
@@ -59,7 +57,6 @@ test.describe('Cart functionality tests', () => {
         expect(numberOfItems).toBe(3)
     });
 
-    // użytkownik ma możliwość zmiany ilości wybranej wycieczki (pojedynczej pozycji) na stronie koszyka,
     test('User can change the quantity of a trip in the cart', async ({ navigationPage, cartPage }) => {
         test.setTimeout(120000)
         await navigationPage.searchAndAddTripsToCart(windsurfing.Karpathos)
@@ -69,7 +66,6 @@ test.describe('Cart functionality tests', () => {
         expect(doubleTripPrice).toBe(Number(singleTripPrice) * 2)
     });
 
-    // użytkownik ma możliwość usunięcia wycieczki na stronie koszyka (całej pozycji),
     test('User can remove a trip from the cart', async ({ navigationPage, cartPage }) => {
         await navigationPage.searchAndAddTripsToCart(windsurfing.Sal, other.Mazury)
         const numberOfItems = await cartPage.getItemsCount()
@@ -78,11 +74,9 @@ test.describe('Cart functionality tests', () => {
     });
 })
 
-
-
-
 /* 
 [TODO]
+timeouts
 • użytkownik jest informowany o błędach w formularzu na stronie płatności poprzez odpowiednie
 komunikaty,
 • użytkownik ma możliwość zalogowania się na stronie płatności i dokonać płatności jako zalogowany

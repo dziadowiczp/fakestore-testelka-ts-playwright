@@ -1,25 +1,18 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Locator, Page } from '../pages/base-page';
 import { Trip } from "../data/trips";
 import { ProductPage } from "./product-page"
 import { CartPage } from "./cart-page"
 
+
 export class NavigationPage {
-    CartButton: Locator;
-    SearchField: Locator;
-    SubmitSearch: Locator;
-    StoreNoticeDismiss: Locator;
-    TripHeader: string;
-    TripAddedToCartAlert: string;
-
-
+    private CartButton: Locator;
+    private SearchField: Locator;
+    private StoreNoticeDismiss: Locator;
 
     constructor(private page: Page) {
         this.CartButton = page.locator('#menu-item-200');
         this.SearchField = page.locator('input#woocommerce-product-search-field-0')
         this.StoreNoticeDismiss = page.locator('.woocommerce-store-notice__dismiss-link')
-        this.SubmitSearch = page.locator('form.woocommerce-product-search button[type="submit"]')
-        this.TripHeader = '//h1[text() = "{tripName}"]'
-        this.TripAddedToCartAlert = '//div[contains(text(), "„{tripName}“ został dodany do koszyka.")]'
     }
 
     async closeStoreNotice(): Promise<void> {
@@ -41,8 +34,8 @@ export class NavigationPage {
         await this.SearchField.waitFor({ state: 'visible' });
         await this.SearchField.fill(tripName.name);
         await this.SearchField.press('Enter');
-        const tripHeaderSelector = this.TripHeader.replace('{tripName}', this.formatTripName(tripName.name))
-        await this.page.waitForSelector(tripHeaderSelector, { timeout: 10000 });
+        const productPage = new ProductPage(this.page)
+        await this.page.waitForSelector(productPage.formatTripHeader(tripName), { timeout: 10000 });
     }
 
     async searchAndAddTripsToCart(...tripNames: Trip[]): Promise<void> {
@@ -50,13 +43,8 @@ export class NavigationPage {
         for (const tripName of tripNames) {
             await this.searchSpecificTrip(tripName);
             await productPage.clickAddToCart();
-            const alertMessageSelector = this.TripAddedToCartAlert.replace('{tripName}', this.formatTripName(tripName.name))
-            await this.page.waitForSelector(alertMessageSelector, { timeout: 10000 })
+            await this.page.waitForSelector(productPage.formatTripHeader(tripName), { timeout: 10000 });
         }
         await this.clickCartButton()
-    }
-
-    private formatTripName(name: string): string {
-        return name.replace('-', '–');
     }
 }
