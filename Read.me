@@ -1,0 +1,44 @@
+• użytkownik ma możliwość dodania wybranej wycieczki do koszyka ze strony tej wycieczki,
+• użytkownik ma możliwość dodania wybranej wycieczki do koszyka ze strony kategorii,
+• użytkownik ma możliwość dodania co najmniej 10 wycieczek do koszyka (w sumie i w dowolnej
+kombinacji),
+• użytkownik ma możliwość wybrania ilości wycieczek, które chce zakupić, na stronie produktu (np. dla
+zamówienia dla kilku osób),
+• użytkownik ma możliwość dodania 10 różnych wycieczek do koszyka,
+• użytkownik ma możliwość zmiany ilości wybranej wycieczki (pojedynczej pozycji) na stronie koszyka,
+• użytkownik ma możliwość usunięcia wycieczki na stronie koszyka (całej pozycji),
+• użytkownik jest informowany o błędach w formularzu na stronie płatności poprzez odpowiednie
+komunikaty,
+• użytkownik ma możliwość zalogowania się na stronie płatności i dokonać płatności jako zalogowany
+użytkownik,
+• użytkownik ma możliwość założenia konta na stronie płatności i dokonać jednocześnie płatności,
+• użytkownik ma możliwość dokonania zakupu bez zakładania konta,
+• użytkownik, który posiada konto może zobaczyć swoje zamówienia na swoim koncie,
+• użytkownik po dokonaniu zamówienia może zobaczyć podsumowanie, które zawiera numer
+zamówienia, poprawną datę, kwotę, metodę płatności, nazwę i ilość zakupionych produktów.
+Strona koszyka to: https://fakestore.testelka.pl/koszyk/
+A strona płatności: https://fakestore.testelka.pl/zamowienie/
+Założenia i wykluczenia
+Dokonamy tutaj kilku założeń. Weź je pod uwagę w trakcie pisania testów automatycznych.
+Wykluczenia
+• Nie testujemy bramki płatności Stripe i komunikatów jej dotyczących; wybieramy zatem jako metodę
+płatności tą domyślną podaną na stronie płatności na Fakestore, zaraz powyżej pól do danych karty
+(czyli karta o numerze 4242424242424242 z dowolnym kodem CVC oraz prawidłową datą ważności).
+• Na potrzeby tego zadania, pomijamy testowanie powiadomień mailowych.
+• Nie testuj wszystkich kombinacji nieprawidłowych kodów pocztowych. Wystarczy, że sprawdzisz, że jak
+to pole jest puste, to przy próbie zakupu wyświetla się odpowiedni komunikat.
+• Pomijamy testowanie kuponów rabatowych.
+• Nie testujemy procesu zakładania konta. Potwierdź tylko, że możesz zamówić produkt z jednoczesnym
+założeniem konta.
+• Nie testujemy stanu magazynowego (czyli ilości dostępnych produktów).
+• Na stronie płatności nie testujemy nieobowiązkowych pól.
+Założenia
+• Zakładamy, że obecne działanie strony jest prawidłowe, a w szczególności, że wyświetlane komunikaty
+są w porządku (chyba, że coś jest nieprzetłumaczone).
+• Po każdym teście, w którym tworzysz nowe konto, usuń stworzonego użytkownika (link „Usuń konto”
+dostępny jest z kokpitu w „Moim koncie” po zalogowaniu).
+• Testy powinny działać zarówno na Chrome i Firefoxa (po prostu potwierdź, że Twoje testy działają na
+obu przeglądarkach; konfigurację na stałe możesz mieć tylko w jednej). Żeby sobie ułatwić życie i pracę
+skorzystaj z WebDriverManager, który sam ogarnie odpowiednie drivery.
+• Zadanie robimy jeszcze bez Page Object Model.
+• Testy mają się uruchamiać lokalnie.

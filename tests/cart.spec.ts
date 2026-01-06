@@ -25,7 +25,7 @@ test.describe('Cart functionality tests', () => {
         }
         await navigationPage.clickCartButton()
         const numberOfItems = await cartPage.getItemQuantity(1)
-        expect(numberOfItems).toBe(10)
+        await expect(numberOfItems).toBe(10)
     });
 
     test('[wip] User can search and add at least 10 trips to the cart from product pages', async ({ navigationPage, cartPage }) => {
@@ -43,9 +43,7 @@ test.describe('Cart functionality tests', () => {
             yoga.Wlochy,
         )
         const numberOfProducts = await cartPage.getItemsCount()
-        expect(numberOfProducts).toBe(10
-
-        )
+        await expect(numberOfProducts).toBe(10)
     });
 
     test('User can select the quantity of a trip on the product page before adding to the cart', async ({ navigationPage, cartPage, productPage }) => {

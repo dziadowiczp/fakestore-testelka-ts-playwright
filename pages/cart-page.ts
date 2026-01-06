@@ -44,10 +44,9 @@ export class CartPage {
         return Number(quantity);
     }
 
-    
     async waitForCartUpdate(): Promise<void> {
-        await this.processingSpinner.waitFor({ state: 'visible', timeout: 20000 });
-        await this.processingSpinner.waitFor({ state: 'hidden', timeout: 20000 });
+        await this.processingSpinner.waitFor({ state: 'attached'});
+        await this.processingSpinner.waitFor({ state: 'detached'});
     }
     
     async changeItemQuantity(positionInCart: number, numOfItems: number): Promise<void> {

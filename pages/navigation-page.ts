@@ -16,8 +16,8 @@ export class NavigationPage {
     }
 
     async closeStoreNotice(): Promise<void> {
-        this.StoreNoticeDismiss.click();
-        expect(this.StoreNoticeDismiss).toBeHidden()
+    await this.StoreNoticeDismiss.click();
+    await expect(this.StoreNoticeDismiss).toBeHidden();
     }
 
     async clickCartButton(): Promise<void> {
